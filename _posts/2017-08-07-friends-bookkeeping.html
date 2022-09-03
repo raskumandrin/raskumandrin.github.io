@@ -1,0 +1,364 @@
+---
+url: friends-bookkeeping
+title: Бухгалтерия для друзей в поездках
+excerpt: |
+    <p><a href="/friends-bookkeeping"><img class="img-fluid" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2017-08-07-friends-bookkeeping/buh-og.jpg"></a></p>
+
+og_image: //s3-eu-west-1.amazonaws.com/raskumandrin/2017-08-07-friends-bookkeeping/buh-og.jpg
+og_title: Бухгалтерия для друзей в поездках
+og_description: "Бухгалтерия для друзей в поездках"
+categories: things
+js: [fresco]
+
+---
+<h2>Задача</h2>
+<p>Аня, Боря, Вика и Гена едут на шашлыки. Боря платит за бензин 1200₽.
+Гена с Викой покупают мясо за 1600₽ и вино за 1200₽, а Аня — овощи за 600₽.
+Боря за рулём и не пьёт алкоголь.</p>
+<p>Как поделить расходы?</p>
+
+<p>Почти все сталкивались с такой задачей. Для условий выше можно посчитать кое-как в уме всё.
+    Но если и расходов, и людей становится больше — в уме не особо посчитаешь.
+
+<p>В одной из поездок <a href="https://www.facebook.com/pindew" title="facebook"><span class="footstep-icon icon-facebook"></span></a> <a href="https://www.facebook.com/pindew">Андрей</a>
+научил, как это считать легко и без ошибок.</p>
+
+
+
+<h2>Метод</h2>
+
+<p>Нам нужна двойная запись. Создаём такую табличку.</p>
+
+<table class="table table-sm table-bordered">
+    <col width="20%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+  <thead>
+    <tr>
+      <th rowspan="2" class="text-center align-middle">Расходы</th>
+      <th colspan="4" class="text-center table-info">Оплаты</th>
+      <th colspan="4" class="text-center table-warning">Потребление</th>
+    </tr>
+    <tr>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Берём первый расход. Вносим его слева в ячейку, кто платил. А справа — делим на всех, кто пользовался.</p>
+
+<table class="table table-sm table-bordered">
+    <col width="20%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+  <thead>
+    <tr>
+      <th rowspan="2" class="text-center align-middle">Расходы</th>
+      <th colspan="4" class="text-center table-info">Оплаты</th>
+      <th colspan="4" class="text-center table-warning">Потребление</th>
+    </tr>
+    <tr>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Бензин</td>
+      <td class="text-right"></td>
+      <td class="text-right">1200</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>И так по каждому расходу. Обратите внимание, что Боря не пьёт вино.</p>
+
+<table class="table table-sm table-bordered">
+    <col width="20%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+  <thead>
+    <tr>
+      <th rowspan="2" class="text-center align-middle">Расходы</th>
+      <th colspan="4" class="text-center table-info">Оплаты</th>
+      <th colspan="4" class="text-center table-warning">Потребление</th>
+    </tr>
+    <tr>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>бензин</td>
+      <td class="text-right"></td>
+      <td class="text-right">1200</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+    </tr>
+    <tr>
+      <td>мясо</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">800</td>
+      <td class="text-right">800</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+    </tr>
+    <tr>
+      <td>вино</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">600</td>
+      <td class="text-right">600</td>
+      <td class="text-right">400</td>
+      <td class="text-right"></td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+    </tr>
+    <tr>
+      <td>овощи</td>
+      <td class="text-right">600</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Считаем сумму по каждому столбцу. А потом складываем эти суммы отдельно для оплат и потреблений.</p>
+
+<table class="table table-sm table-bordered">
+    <col width="20%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+    <col width="10%"><col width="10%"><col width="10%"><col width="10%">
+  <thead>
+    <tr>
+      <th rowspan="2" class="text-center align-middle">Расходы</th>
+      <th colspan="4" class="text-center table-info">Оплаты</th>
+      <th colspan="4" class="text-center table-warning">Потребление</th>
+    </tr>
+    <tr>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>бензин</td>
+      <td class="text-right"></td>
+      <td class="text-right">1200</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+      <td class="text-right">300</td>
+    </tr>
+    <tr>
+      <td>мясо</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">800</td>
+      <td class="text-right">800</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+    </tr>
+    <tr>
+      <td>вино</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">600</td>
+      <td class="text-right">600</td>
+      <td class="text-right">400</td>
+      <td class="text-right"></td>
+      <td class="text-right">400</td>
+      <td class="text-right">400</td>
+    </tr>
+    <tr>
+      <td>овощи</td>
+      <td class="text-right">600</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+      <td class="text-right">150</td>
+    </tr>
+  </tbody>
+  <tfooter>
+    
+    <tr>
+      <td rowspan="2" class="align-top">Итого</td>
+      <td class="text-right">600</td>
+      <td class="text-right">1200</td>
+      <td class="text-right">1400</td>
+      <td class="text-right">1400</td>
+      <td class="text-right">1250</td>
+      <td class="text-right">850</td>
+      <td class="text-right">1250</td>
+      <td class="text-right">1250</td>
+    </tr>
+    <tr>
+      <td colspan="4" class="text-right text-success">4600</td>
+      <td colspan="4" class="text-right text-success">4600</td>
+    </tr>
+  </tfooter>
+</table>
+
+<p>Важно: два итоговых числа должны быть одинаковыми. Если это не так — где-то выше ошибка, перепроверяйте.
+    Двойная запись как раз тут и нужна, чтобы отследить неточности в учёте. На практике, когда в таблице два-три десятка строк
+    и особенно разбор всяких общих чеков из ресторанов на этом этапе часто возникает ошибка и это
+    позволяет вовремя исправить расчёты.</p>
+    
+<p>Да что там два-три десятка! Я пока этот пример писал, допустил ошибку и сумма не сошлась сначала.</p>
+
+<p>У Антона вот тоже есть про аналогичный метод, но там нет двойной записи: <a href="http://batony4.livejournal.com/49665.html">http://batony4.livejournal.com/49665.html</a>.<p>
+
+<p>Кстати, да. У Антона вот есть про то, что кто-то кому-то даёт денег в долг. Это в поездках происходит время от времени. Выше, если Боря даёт в долг Гене 1000₽, то у Бори это
+    должно попасть в колонку расходов, а у Гены — в колонку потребления, у других участников все ячейки будут пустыми, и эта операция
+    никак на них не повляет.<p>
+
+<p>Отвлёкся. Следующий шаг — вычесть из оплат каждого участника его потребление.</p>
+
+
+<table class="table table-sm table-bordered">
+    <col width="28%">
+    <col width="18%"><col width="18%"><col width="18%"><col width="18%">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">Аня</th>
+      <th class="text-center">Боря</th>
+      <th class="text-center">Вика</th>
+      <th class="text-center">Гена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="table-info">Оплаты</th>
+      <td class="text-right">600</td>
+      <td class="text-right">1200</td>
+      <td class="text-right">1400</td>
+      <td class="text-right">1400</td>
+    </tr>
+      
+    <tr>
+      <th class="table-warning">Потребление</th>
+      <td class="text-right">1250</td>
+      <td class="text-right">850</td>
+      <td class="text-right">1250</td>
+      <td class="text-right">1250</td>
+    </tr>
+
+    <tr>
+      <th>Итого</th>
+      <td class="text-right text-danger">–650</td>
+      <td class="text-right text-success">350</td>
+      <td class="text-right text-success">150</td>
+      <td class="text-right text-success">150</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Всё. Теперь тот, у кого отрицательное число, платит соответствующие суммы тем, у кого положительные. В данном случае Аня
+    должна заплатить 350₽ Боре и по 150₽ Вике и Гене.</p>
+    
+<p>Ещё можно проверить — сумма всех чисел последней итоговой строки должна быть нулевой. Если вдруг не так — нужно возвращаться назад и искать ошибку.</p>
+
+<h2>Несколько комментариев</h2>
+
+<p>Расходы удобно подводить вечером того же дня. Пока все помнят более или менее, что происходило. Занимает это не более получаса.</p>
+   
+<p>В ресторане, если раздельный счёт, это вообще не следует учитывать в общей бухгалтерии. Если же за всех платт кто-то один —
+    не забудьте забрать счёт со списком яств. Потом разбираетесть кто что ел и это вносится в таблицу по соответствующим
+    столбцам потребления.</p>
+    
+<p>Назначьте кого-то <b>одного</b> ответственным сбор чеков в течение дня и запись кто где сколько платил.</p>
+
+<hr>
+
+<p>Вот например кусочек нашей бухгалтерии в <a href="/czech-holiday">поездке по Чехии</a>.</p>
+
+
+<p><a class="fresco" data-fresco-group="fresco-group-1" href="//s3-eu-west-1.amazonaws.com/raskumandrin/2017-08-07-friends-bookkeeping/buh.jpg"><img class="img-fluid" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2017-08-07-friends-bookkeeping/buh.jpg"></a></p>

@@ -1,0 +1,78 @@
+---
+layout: contents
+title: Contents
+permalink: en/contents
+---
+
+<div id="header">
+	<h1>Contents</h1><span class="rightfloat">&larr;<a href="/en/"><span style="
+        display:inline-block;    
+        width:16px;    
+        height:16px;  
+        vertical-align:text-top;  
+        background-image:url(/apple-touch-icon-16x16.png);  
+        background-repeat:no-repeat;
+        margin-right: 8px;
+        background-position: 0px 0px; }
+        
+        "></span>Blog</a></span></div>
+
+
+<table id="content">
+<tr>
+  <th>Life</th>
+  <th>Work </th>
+  <th>Russia</th>
+  <th>World</th>
+</tr>
+
+{% assign postsByYear =
+    site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+{% for year in postsByYear %}
+    <tr><td class="year" colspan="5">{{ year.name }} </td></tr>
+<tr>
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "things" and post.lang == "en" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "work" and post.lang == "en" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "russia" and post.lang == "en" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "world" and post.lang == "en" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+</tr>
+
+{% endfor %}
+
+</table>

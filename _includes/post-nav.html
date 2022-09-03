@@ -1,0 +1,39 @@
+<ul class="breadcrumbs">
+
+{% if page.lang == "en" %}
+    <li><a href="/en/contents">Everything</a></li>
+    {% assign categories = site.data.en.categories %}
+    {% assign countries = site.data.en.countries %}
+{% else %}
+    <li><a href="/contents">Все записи</a></li>
+    {% assign categories = site.data.ru.categories %}
+    {% assign countries = site.data.ru.countries %}
+{% endif %}
+
+{% for category in categories %}
+{% if include.p.categories contains category.label %}
+
+    {% if page.lang == "en" %}
+    <li><a href="/en/{{ category.label }}" rel="category tag">{{ category.title }}</a></li>
+    {% else %}
+    <li><a href="/{{ category.label }}" rel="category tag">{{ category.title }}</a></li>
+    {% endif %}
+
+    {% if category.label == "world" %}
+        <li>
+        {% for country in countries %}
+        {% if include.p.countries contains country.label %}
+            {% if page.lang == "en" %}
+            <a href="/en/{{ country.label }}"><span class="flag-{{ country.label }}"></span>{{ country.title }}</a>
+            {% else %}
+            <a href="/{{ country.label }}"><span class="flag-{{ country.label }}"></span>{{ country.title }}</a>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        </li>
+    {% endif %}
+
+{% endif %}
+{% endfor %}
+
+</ul>

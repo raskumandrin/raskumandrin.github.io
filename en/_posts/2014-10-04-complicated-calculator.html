@@ -1,0 +1,62 @@
+---
+url: complicated-calculator
+title: Complicated calculator in JavaSctipt
+excerpt: |
+    <p>I've published example of <a href="/en/simple-calculator">simple calculator in JavaScript</a> earlier, this is more complicated one.</p>
+    <p style="text-align: center;"><a href="/en/complicated-calculator"><img style="border: solid 1px #f9f9f9; padding: 4px; border-radius: 3px;" width="450" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-10-04-complicated-calculator/ceiling-calc-en-th-ogimage.jpg" class="img-fluid"></a></p>
+    <p>Calculator required for the automation of the sales department of ceilings producers.
+    An algorithm for calculating the cost turned out to be very complicated with a large number of dependencies between parameters.
+    Besides the parameters themselves ceilings existed more discounts, which are intertwined
+    intermediate and final results of the calculations.</p>
+
+cuttitle: Results of the work
+categories: work
+tags: [javascript]
+
+---
+<p>I've published example of <a href="/simple-calculator">simple calculator in JavaScript</a> earlier, this is more complicated one.</p>
+
+<p>Calculator required for the automation of the sales department of ceilings producers.
+An algorithm for calculating the cost turned out to be very complicated with a large number of dependencies between parameters.
+Besides the parameters themselves ceilings existed more discounts, which are intertwined
+intermediate and final results of the calculations.</p>
+
+<p>Calculating the cost of ceilings for a client could take up to one hour
+by sales manager. Firstly, it is strongly inhibited
+working sales team. Another negative factor was a high probability of occurrence
+errors in manual calculations that later affected the loyalty of the customers.
+Finally, it is very difficult to train a new employee computing features and exceptions to the rule.</p>
+
+<p>Technical requirements were practically no initially. More accurate view of the customer that
+It would be nice to implement it all in an Excel.</p>
+
+<p>I have proposed a variant of the web version of the calculator. As a result, it was possible to avoid dependencies
+Excel'ya specific versions, installation difficulties on all computers that support the current update
+the software part, as well as easy to implement access from various devices.</p>
+
+<p>All calculations, it was decided to carry out on the front end in JavaScropt - is on the one hand made it possible to
+get the result instantly, without having to send the entire array of data to the server and analyze the response; on the other hand
+it allowed a little easier to manage all of that will change the calculator works algorithms.</p>
+
+<p>The <a href="http://getbootstrap.com"> Bootstrap </a> was selected as an interface, allowing no
+to think about the design of individual elements of the interface, and fully concentrate on the software part.</p>
+
+<p>The final form of the calculator:</p>
+
+<p style="text-align: center;"><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-10-04-complicated-calculator/ceiling-calc-en.jpg"><img style="border: solid 1px #f9f9f9; padding: 4px; border-radius: 3px;"  src="https://s3-eu-west-1.amazonaws.com/raskumandrin/2014-10-04-complicated-calculator/ceiling-calc-en-th.jpg" class="img-fluid"></a></p>
+
+<p>The initial problems were resolved. Now only required to make the right number - all calculations
+occurred immediately. The sales staff did not need to thoroughly understand the peculiarities
+algorithm. For ease of use to new employees for each parameter were made
+sufficiently detailed tooltips mentioning features and exceptions.</p>
+
+<p style="font-size: 120%; color: #333;"><a href="https://raskumandrin.s3-eu-west-1.amazonaws.com/2014-10-04-complicated-calculator/src/complicated-calculator-en-layout.html">Working version of the interactive calculator of ceilings production</a>.</p>
+
+<p>The calculation may be several ceilings, such as kitchen, living room, bathroom. Ceilings can be
+of two types: <a href="https://en.wikipedia.org/wiki/Polyvinyl_chloride">PVC</a> and fabric.
+	For both types had a lot in common in calculating the cost.</p>
+<p>As a result, the ceiling was implemented a class that holds the state and performs the calculations are the same for both ceilings.
+For both types of ceilings implemented classes that inherit from this overall ceiling of the class, allowing reflect
+particularities of each type.</p>
+
+<p>Among other things, the export procedure has been developed in Excel the final cost estimates for the ceilings set.</p>

@@ -1,0 +1,77 @@
+---
+url: besplatnyj-proksi-cherez-ssh
+title: Бесплатный прокси через ssh
+excerpt: |
+    <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/tunnel.jpg"></p>
+    <p>В процессе работы над одним из проектов случайно появилось решение, как можно организовать практически бесплатный прокси-сервер через ssh-соединение (ну например в-контактик на работе закрыт, а ssh — нет).</p>
+    <p>Алгоритм получается примерно такой:</p>
+    <ol>
+    <li>Регистрация аккаунта на amazon</li>
+    <li>Создание виртуального сервера</li>
+    <li>Корректирование параметров доступа</li>
+    <li>Настройка putty, организация туннеля до созданного сервера</li>
+    <li>Настройка firefox, корректировка способа доступа к сети</li>
+    </ol>
+
+cuttitle: "Подробнее об этих шагах"
+categories: work
+tags: [unix]
+
+---
+		<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/tunnel.jpg"></p>
+		<p>В процессе работы над одним из проектов случайно появилось решение, как можно организовать практически бесплатный прокси-сервер через ssh-соединение (ну например в-контактик на работе закрыт, а ssh — нет).</p>
+		<p>Алгоритм получается примерно такой:</p>
+		<ol>
+		<li>Регистрация аккаунта на amazon</li>
+		<li>Создание виртуального сервера</li>
+		<li>Корректирование параметров доступа</li>
+		<li>Настройка putty, организация туннеля до созданного сервера</li>
+		<li>Настройка firefox, корректировка способа доступа к сети</li>
+		</ol>
+		<h3>Регистрация аккаунта на amazon</h3>
+		<p>У Амазона есть бесплатное предложение использования виртуального сервера в течение первого года существования аккаунта при некоторых ограничениях. Подробнее можно узнать тут:&nbsp;<a href="http://aws.amazon.com/free/">http://aws.amazon.com/free/</a>. Для создания аккаунта понадобится банковская карточка и сотовый телефон. С карточки снимут доллар при регистрации, на сотовый поступит звонок для проверки.</p>
+		<p>В качестве карточки очень удобно использовать <a href="https://w.qiwi.com/qiwicard/main.action">виртуальные карты от QIWI</a>.</p>
+		<p>Сложного в регистрации ничего нет описывать подробнее не вижу смысла.</p>
+		<h3>Создание виртуального сервера</h3>
+		<p>В панели управления нужно выбрать «EC2» (Virtual Servers in the Cloud).</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-console.jpg"><img class="aligncenter size-large wp-image-55" title="ec2-console" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-console-680x451.jpg" alt="" width="680" height="451"></a></p>
+		<p>В правом верхнем углу нужно выбрать регион датацентра, где будет находиться виртуальный сервер.</p>
+		<p>Нажимаем «Launch Instance». Практически всё будет со стандартными параметрами.</p>
+		<p>Используем&nbsp;Classic Wizard. Выбираем «<strong>Amazon Linux AMI</strong>». Проверяем, что в качестве&nbsp;Instance Type указан T1 Micro (который бесплатный). Создаём ключи для доступа, скачиваем открытый ключ.</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-key-pair.jpg"><img class="aligncenter size-large wp-image-60" title="ec2-key-pair" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-key-pair-680x451.jpg" alt="" width="680" height="451"></a></p>
+		<p>Для нашей задачи будет достаточно стандартной группы безопасности.</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-security-group.jpg"><img class="aligncenter size-large wp-image-63" title="ec2-security-group" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/ec2-security-group-680x451.jpg" alt="" width="680" height="451"></a></p>
+		<p>Запускаем виртуальный сервер.</p>
+		<p>Выбираем раздел «Elastic IPs», нажимаем «Allocate New Address». После выдачи ip-адреса, выбираем его, нажимаем «Associate Address», указываем только что созданный сервер.</p>
+		<p>В результате этих действий был создан виртуальный сервер и для него назначен внешний ip-адрес.</p>
+		<h3>Корректирование параметров доступа</h3>
+		<p>Доступ к серверу может быть осуществлён по созданному выше ключу. Это не всегда удобно (хотя, конечно, более безопасно). Сделаем доступ по паролю и логину.</p>
+		<p>Для скачанного файла ключа устанавливаем права на чтение и запись только для владельца, после чего соединяемся с сервером, используя этот файл ключа. Стоит обратить внимание, что логиниться нужно из-под пользователья ec2-user, а не root.</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/terminal-login.jpg"><img class="aligncenter size-large wp-image-66" title="terminal-login" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/terminal-login-680x420.jpg" alt="" width="680" height="420"></a></p>
+		<p>С помощью команды adduser создаём нового пользователя. Редактируем файл&nbsp;<strong id="internal-source-marker_0.8004942275583744">/etc/ssh/sshd_config</strong> и устанавливаем «<strong id="internal-source-marker_0.8004942275583744">PasswordAuthentication yes</strong>». Перезапускаем сервер ssh:&nbsp;<strong id="internal-source-marker_0.8004942275583744">service sshd restart</strong>. Все команды запускаем через sudo. Пробуем залогиниться из-под нового пользователя с помощью пароля.</p>
+		<h3>Организация туннеля до созданного сервера в *nix</h3>
+		<code>ssh -l логин -D 17778 имя_сервера</code>
+
+		<h3>Oрганизация туннеля до созданного сервера в Windows, настройка putty</h3>
+
+
+		<p>Скачиваем PuTTY с <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">официального сайта</a>.</p>
+		<p>Прописываем ip-адрес, название сессии, сохраняем сессию.</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/putty.png"><img class="aligncenter size-full wp-image-68" title="putty" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/putty.png" alt="" width="455" height="434"></a></p>
+		<p>Соединяемся с сервером.</p>
+		<p>Создаём для PuTTY ярлык, в строке параметров прописывая следующее:</p>
+		<p><strong id="internal-source-marker_0.8004942275583744">putty.exe -load proxy -D 17778 -l <em>login</em> -pw <em>password</em></strong></p>
+		<p><em></em>Теперь при запуске через этот ярлык PuTTY будет устанавливать соедиенение ssh с тунеллированием указанного порта.</p>
+		<h3>Настройка firefox, корректировка способа доступа к сети</h3>
+		<p>В Firefox в настройках прописываем&nbsp;Настройки-&gt;Дополнительно-&gt;Сеть-&gt;Настроить) и ставим&nbsp;<strong id="internal-source-marker_0.8004942275583744">Узел SOCKS localhost 17778</strong></p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/firefox-proxy.png"><img class="aligncenter size-large wp-image-70" title="firefox-proxy" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/firefox-proxy-680x571.png" alt="" width="680" height="571"></a></p>
+		<p>Запускаем PuTTY через созданный на предыдущем шаге ярлык и определяем ip-адрес, который у нас видят снаружи.</p>
+		<p><a href="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/yandex-ip.png"><img class="aligncenter size-large wp-image-71" title="yandex-ip" src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-besplatnyj-proksi-cherez-ssh/yandex-ip-680x305.png" alt="" width="680" height="305"></a></p>
+		<p>Как можно наблюдать, ip, который видит яндекс совпадает с ip, который соотнесён виртуальному серверу и к которому мы подключались по ssh.</p>
+		<p>&nbsp;</p>
+		<h3>Использованные материалы</h3>
+		<p><a href="http://debianadmin.ru/internet-cherez-ssh-bez-proksi.html">http://debianadmin.ru/internet-cherez-ssh-bez-proksi.html</a></p>
+		<p><a href="http://habrahabr.ru/post/135713/">http://habrahabr.ru/post/135713/</a></p>
+		<p><a href="http://stackoverflow.com/questions/6119774/ssh-to-aws-instance-without-key-pairs">http://stackoverflow.com/questions/6119774/ssh-to-aws-instance-without-key-pairs</a></p>
+		<p><a href="http://www.shanghaiwebhosting.com/web-hosting/putty-ssh-auto-login">http://www.shanghaiwebhosting.com/web-hosting/putty-ssh-auto-login</a></p>
+           

@@ -1,0 +1,110 @@
+---
+layout: contents
+title: Все записи
+permalink: contents
+---
+
+<div id="header">
+	<h1>Все записи</h1><span class="rightfloat">&larr;<a href="/"><span style="
+        display:inline-block;    
+        width:16px;    
+        height:16px;  
+        vertical-align:text-top;  
+        background-image:url(/apple-touch-icon-16x16.png);  
+        background-repeat:no-repeat;
+        margin-right: 8px;
+        background-position: 0px 0px; }
+        
+        "></span>Блог</a></span></div>
+
+<div class="date-and-tags">
+Теги:
+
+{% for tag in site.data.ru.tags %}
+    <span class="tags">
+        <a href="/{{ tag.label }}">{{ tag.title }}</a>
+    </span>
+{% endfor %}
+
+</div>
+
+<div class="date-and-tags">
+Страны:
+
+{% for country in site.data.ru.countries %}
+       <a href="/{{ country.label }}" title="{{ country.title }}"><span class="flag-{{ country.label }}">&nbsp;</span></a>
+{% endfor %}
+
+</div>
+
+
+<table id="content">
+<tr>
+  <th>Всё остальное</th>
+  <th>Работа </th>
+  <th>Обращения</th>
+  <th>Странствия тут</th>
+  <th>Странствия там</th>
+</tr>
+
+{% assign postsByYear =
+    site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+{% for year in postsByYear %}
+    <tr><td class="year" colspan="5">{{ year.name }} год</td></tr>
+<tr>
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "things" and post.lang == "ru"  %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "work" and post.lang == "ru" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "official" and post.lang == "ru" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "russia" and post.lang == "ru" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+<td><dl>
+{% assign cat = year.items | reverse %}
+{% for post in cat %}
+{% if post.categories contains "world" and post.lang == "ru" %}
+    <dt>{% include date-no-year.html date=post.date %}</dt>
+    <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+{% endif %}
+{% endfor %}
+</dl></td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+

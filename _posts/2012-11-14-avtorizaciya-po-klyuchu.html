@@ -1,0 +1,56 @@
+---
+url: avtorizaciya-po-klyuchu
+title: Аутентификация по ключу
+excerpt: |
+    <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-avtorizaciya-po-klyuchu/rabbit.jpg" alt="" title="rabbit" width="700" height="94"></p>
+    <p>Наиболее очевидные преимущества аутентификации по ключам — это отсутствие необходимости запоминать и записывать пароли, использование ssh в скриптах, безопасность.</p>
+
+cuttitle: "Генерация и добавление на сервер публичного ключа"
+categories: work
+tags: [unix]
+
+---
+
+
+                        
+<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2012-11-14-avtorizaciya-po-klyuchu/rabbit.jpg"></p>
+
+<pre>cat ~/.ssh/id_rsa.pub | ssh <b>login</b>@<b>server</b> "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"</pre>
+
+<pre>ssh-copy-id  <b>login</b>@<b>server</b></pre>
+
+<p><a href="http://www.commandlinefu.com/commands/view/188/copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id">http://www.commandlinefu.com/commands/view/188/copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id</a></p>
+
+<hr>
+
+<p>Для генерации ключей нужно выполнить</p>
+<pre>ssh-keygen</pre>
+<p>Оболочка сообщит, где сохранены сгенерированные ключи</p>
+<pre>Your identification has been saved in ~/.ssh/id_rsa
+Your public key has been saved in ~/.ssh/id_rsa.pub</pre>
+<p>Копируем публичный ключ на удалённый сервер</p>
+<pre>scp ./.ssh/id_rsa.pub <b>login</b>@<b>server</b>:id_rsa.pub</pre>
+<p>Далее заходим на указанный сервер</p>
+<pre>ssh  <b>login</b>@<b>server</b></pre>
+<p>После чего выполняем последовательность команд, складывающую ключ, куда надо</p>
+<pre>mkdir -p .ssh
+chmod 700 .ssh
+cd&nbsp;.ssh
+cat ../id_rsa.pub &gt;&gt; authorized_keys
+cat authorized_keys
+chmod 600 authorized_keys
+rm ../id_rsa.pub</pre>
+<p>Оставаясь на удаленном хосте, откройте конфигурационный файл SSH:</p>
+<pre>sudo nano /etc/ssh/sshd_config</pre>
+<p>Убедитесь, что следующие атрибуты имеют корректные значения:</p>
+<pre>RSAAuthentication yes
+PubkeyAuthentication yes 
+PasswordAuthentication no</pre>
+<p>И последнее, перезапустите сервер SSH на удаленном хосте:</p>
+<pre>sudo /etc/init.d/ssh reload</pre>
+<p>Теперь можно подключаться к серверу без ввода пароля.</p>
+<h3>Использованная литература</h3>
+<p><a href="http://www.opennet.ru/base/sec/ssh_pubkey_auth.txt.html">http://www.opennet.ru/base/sec/ssh_pubkey_auth.txt.html</a></p>
+<p><a href="http://rus-linux.net/MyLDP/sec/generiruem-kluchi-ssh.html">http://rus-linux.net/MyLDP/sec/generiruem-kluchi-ssh.html</a></p>
+<p>http://www.xakep.ru/magazine/xa/073/104/2.asp</p>
+        

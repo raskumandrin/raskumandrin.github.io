@@ -1,0 +1,53 @@
+---
+layout: default
+permalink: en/post.url
+---
+
+<div class="row"><div class="col poster"> 
+
+
+<ul class="breadcrumbs">
+    <li><a href="/en/contents">Everything</a></li>
+
+{% for category in site.data.en.categories %}
+{% assign post_category = page.categories[1] %}
+
+{% assign c1 = category.label | strip  %}
+{% assign c2 = post_category | strip  %}
+{% if c1 == c2 %}
+    <li><a href="/en/{{ c2 }}" rel="category tag">{{ category.title }}</a></li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+<h1>{{ page.title }}</h1>
+
+<div class="date-and-tags">
+    <span class="date">
+        {% include date-en.html date=page.date %}
+    </span>
+
+
+{% for tag in site.data.en.tags %}
+{% for post_tag in page.tags %}
+
+{% assign t1 = tag.label | strip  %}
+{% assign t2 = post_tag | strip  %}
+
+{% if t1 == t2 %}
+    <span class="tags">
+        <a href="/en/tag/{{ t2 }}">{{ tag.title }}</a>
+    </span>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+</div>
+
+
+{{ content }}
+
+</div></div>
+
+{% include disqus.html %}

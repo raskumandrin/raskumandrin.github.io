@@ -1,0 +1,21 @@
+---
+layout: default
+title: Raskumandrin • Misanthrope's blog
+---
+
+{% assign posts = site.posts | where: "lang", "en" %}
+
+{% for post in posts limit:site.max_posts %}
+<div class="poster">
+
+{% include post-nav.html p=post %}
+
+<h1><a href="{{ site.base-url }}{{ post.url }}">{{ post.title }}</a></h1>
+
+{% include post-nav-date-tag.html p=post %}
+
+<p>{{ post.excerpt }}</p>
+</div>
+{% endfor %}
+
+<p>«Raskumandrin • Misanthrope's blog»: <a href="/en/contents">Contents</a>

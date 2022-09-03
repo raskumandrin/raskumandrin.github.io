@@ -1,0 +1,21 @@
+---
+layout: default
+title: Раскумандрин • Бложек мизантропа
+---
+
+{% assign posts = site.posts | where: "lang", "ru" %}
+
+{% for post in posts limit:site.max_posts %}
+<div class="poster">
+
+{% include post-nav.html p=post %}
+
+<h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+
+{% include post-nav-date-tag.html p=post %}
+
+<p>{{ post.excerpt }}</p>
+</div>
+{% endfor %}
+
+<p>«Раскумандрин • Бложек мизантропа»: <a href="/contents">Все записи</a>

@@ -1,0 +1,18 @@
+---
+layout: default
+permalink: post.url
+---
+
+<div class="row"><div class="col poster"> 
+
+{% include post-nav.html p=page %}
+
+<h1>{{ page.title }}</h1>
+
+{% include post-nav-date-tag.html p=page %}
+
+{{ content }}
+
+</div></div>
+
+{% include disqus.html %}

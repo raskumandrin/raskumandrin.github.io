@@ -1,0 +1,68 @@
+---
+url: purga
+title: Вёрстка страницы сайта теплохода «Пурга»
+excerpt: |
+    <p>В соответствии с постановкой задачи было необходимо по заданному макету сверстать
+    одностраничный сайт с возможностью отправить заявку.</p>
+    <p><a href="/purga"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-07-13-purga/purga.jpg"></a></p>
+
+categories: work
+tags: [javascript]
+js: [highlight]
+
+---
+<p>В соответствии с постановкой задачи было необходимо по заданному макету сверстать
+одностраничный сайт с возможностью отправить заявку.</p>
+
+<noindex>
+<p>В результате получилась <a href="https://raskumandrin.s3-eu-west-1.amazonaws.com/2014-07-13-purga/purga-ru-layout.html">вот такая вёрстка</a>.</p>
+
+<p style="text-align: center"><a href="https://raskumandrin.s3-eu-west-1.amazonaws.com/2014-07-13-purga/purga-ru-layout.html"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-07-13-purga/screen.th.jpg"></a></p>
+</noindex>
+
+<p>Кроме прочего клиенту предоставляется возможность выбрать количество часов для мероприятия.
+	В макете был приведён вариант «5 часов». Всё бы ничего, но если менять только
+	число часов, получаются отвратительные «1 часов», «2 часов» и пр. Об этом писал Артемий Лебедев в своём Ководстве:
+	«<a href="http://www.artlebedev.ru/kovodstvo/sections/98/">§ 98. Здравствуйте, с вами говорит робот</a>.»</p>
+	
+	<p>Заказчик не ставил такой задачи, но отдавать некачественную работу мне совсем не хотелось. Да склонения потребовали дополнительных
+		усилий, но результат стоил того. Теперь сайт корректно сообщает: «1 час», «2 часа», &hellip;, «4 часа», «5 часов», &hellip;</p>
+		
+<p>Реализация склонения числительных на javascript выполнена в виде функции. При вызове функции передаётся
+	непосредственно числительное и все формы склонения — функция возвращает нужную из них.</p>		
+
+
+<pre><code class="javascript">function plural(n,form1,form2,form5) {
+
+	n = Math.abs(n) % 100;
+	var n1 = n % 10;
+
+	if (n > 10 && n < 20) {
+		return form5
+	};
+	if (n1 > 1 && n1 < 5) {
+		return form2
+	};
+	if (n1 == 1) {
+		return form1
+	};
+
+    return form5;
+}
+
+var hour;
+
+hour = 1;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 1 час
+
+hour = 3;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 3 часа
+
+hour = 1357;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 1357 часов</code></pre>
+
+
+<p>Кроме этого наткнулся на замечательную библиотеку <a href="https://github.com/firstopinion/formatter.js">formatter.js</a> для форматированного заполнения полей формы.</p>

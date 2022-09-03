@@ -1,0 +1,47 @@
+max_posts: 10
+permalink: /:slug
+
+exclude: [tools]
+
+defaults:
+  # Default language
+  -
+    scope:
+      path: ""
+    values:
+      lang: "ru"
+      layout: "post"
+      base-url: "/"
+
+  -
+    scope:
+      path: "robots.txt"
+    values:
+      layout: "none"
+
+  # Language for everything inside `/en`
+  -
+    scope:
+      path: "en"
+    values:
+      lang: "en"
+      layout: "default"
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts"
+    values:
+      layout: "post"
+      base-url: "/"
+  # Language for English posts
+  -
+    scope:
+      path: "en/_posts"
+      type: "posts"
+    values:
+      lang: "en"
+      layout: "post-en"
+      base-url: "/en/"
+      permalink: /en/:slug
+# Jekyll: Multilingual: https://kleinfreund.de/jekyll-multilingual/
+

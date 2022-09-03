@@ -1,0 +1,24 @@
+<div class="date-and-tags">
+    <span class="date">
+        {% if page.lang == "en" %}
+            {% include date-en.html date=include.p.date %}
+            {% assign tags = site.data.en.tags %}
+        {% else %}
+            {% include date.html date=include.p.date %}
+            {% assign tags = site.data.ru.tags %}
+        {% endif %}
+    </span>
+
+{% for tag in tags %}
+    {% if include.p.tags contains tag.label %}
+        <span class="tags">
+            {% if page.lang == "en" %}
+            <a href="/en/{{ tag.label }}">{{ tag.title }}</a>
+            {% else %}
+            <a href="/{{ tag.label }}">{{ tag.title }}</a>
+            {% endif %}
+        </span>
+    {% endif %}
+{% endfor %}
+
+</div>

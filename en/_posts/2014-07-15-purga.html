@@ -1,0 +1,61 @@
+---
+url: purga
+title: Layout for webpage of ship «Purga»
+excerpt: |
+    <p>In accordance with the statement of the problem it was necessary to impose a given layout 
+    one-page site with the ability to send a request from client by mail.</p>
+    <p><a href="/en/purga"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-07-13-purga/purga.jpg" class="img-fluid"></a></p>
+
+categories: work
+tags: [javascript]
+js: [highlight]
+
+---
+<p>In accordance with the statement of the problem it was necessary to impose a given layout 
+one-page site with the ability to send a request from client by mail.</p>
+
+
+<noindex>
+<p>The result was <a href="https://raskumandrin.s3-eu-west-1.amazonaws.com/2014-07-13-purga/purga-ru-layout.html">such layout</a>.</p>
+
+<p style="text-align: center"><a href="https://raskumandrin.s3-eu-west-1.amazonaws.com/2014-07-13-purga/purga-ru-layout.html"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-07-13-purga/screen.th.jpg" class="img-fluid"></a></p>
+</noindex>
+
+<p>Russian language provide different endings for numerals. So the javascript code below is actual only for use with Russian language.
+There is <a href="http://www.artlebedev.ru/kovodstvo/sections/98/">an article</a> about endings.
+</p>
+
+<pre><code class="javascript">function plural(n,form1,form2,form5) {
+
+	n = Math.abs(n) % 100;
+	var n1 = n % 10;
+
+	if (n > 10 && n < 20) {
+		return form5
+	};
+	if (n1 > 1 && n1 < 5) {
+		return form2
+	};
+	if (n1 == 1) {
+		return form1
+	};
+
+    return form5;
+}
+
+var hour;
+
+hour = 1;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 1 час
+
+hour = 3;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 3 часа
+
+hour = 1357;
+console.log( hour + plural( hour,' час',' часа',' часов' ) );
+// 1357 часов</code></pre>
+
+
+<p>Besides stumbled upon a remarkable library <a href="https://github.com/firstopinion/formatter.js">formatter.js</a> for the formatted fill out form fields.</p>

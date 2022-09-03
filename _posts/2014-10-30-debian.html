@@ -1,0 +1,331 @@
+---
+url: debian
+title: Разворачивание Debian сервера
+excerpt: |
+    <p><a href="/debian"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-10-30-debian/debian.jpg"></a></p>
+
+categories: work
+tags: [unix]
+
+---
+
+<p>Обычно Debian уже установлен на арендуемой площадке, напрмиер, если речь про Digital Ocean или Hetzner.</p>
+
+
+<h2 class="georgia-gray">Обновление</h2>
+<p><code>apt-get update && apt-get upgrade</code></p>
+<p>update - обновить информацию о пакетах, содержащихся в репозиториях.
+<br>upgrade - обновление пакетов, для которых в репозитории доступны новые версии.</p>
+
+<h2 class="georgia-gray">Добавление пользователя</h2>
+<p>Пароль придумать и сохранить в соответствующей документации</p>
+<p><code>adduser admin --home /home/admin</code></p>
+
+<h2 class="georgia-gray">Запрет доступа из-под root</h2>
+<p><code>vi /etc/ssh/sshd_config</code></p>
+
+<p>Отредактировать чтобы было <code>PermitRootLogin no</code></p>
+
+<p><code>/etc/init.d/ssh restart</code></p>
+
+<h2 class="georgia-gray">Установка sudo</h2>
+<p><code>apt-get -y install sudo</code></p>
+
+<p>Прописать в конфиге доступ без пароля (вопрос безопасности?!)</p>
+
+<p><code>vi /etc/sudoers</code></p>
+
+<p>Внести необходимые дополнения</p>
+
+<pre class="padding"># User privilege specification
+root   ALL=(ALL) ALL
+admin  ALL=(ALL) NOPASSWD: ALL
+
+%%sudo  ALL=NOPASSWD: ALL
+%%admin ALL=NOPASSWD: ALL</pre>
+
+<h2 class="georgia-gray">Прописать ssh-доступ по ключу</h2>
+<p>Для генерации ключей нужно выполнить</p>
+
+<p><code>ssh-keygen</code></p>
+<p>Оболочка сообщит, где сохранены сгенерированные ключи</p>
+
+<p><code>Your identification has been saved in ~/.ssh/id_rsa
+<br>Your public key has been saved in ~/.ssh/id_rsa.pub</code></p>
+
+<p>Копируем публичный ключ на удалённый сервер</p>
+
+<p><code>scp ./.ssh/id_rsa.pub admin@8.8.8.8:id_rsa.pub</code></p>
+<p>Далее заходим на указанный сервер</p>
+
+<p><code>ssh admin@8.8.8.8</code></p>
+<p>После чего выполняем последовательность команд, складывающую ключ, куда надо</p>
+<p>
+<code>mkdir -p .ssh
+<br>chmod 700 .ssh
+<br>cd .ssh
+<br>cat ../id_rsa.pub >> authorized_keys
+<br>cat authorized_keys
+<br>chmod 600 authorized_keys
+<br>rm ../id_rsa.pub</code></p>
+
+<h2 class="georgia-gray">Vim</h2>
+
+<p><code>sudo apt-get -y install vim</code></p>
+<p><code>vi ~/.vimrc</code></p>
+<p><pre class="padding">syntax on
+au BufNewFile,BufRead *.html.ep set filetype=html
+</pre></p>
+
+<h2 class="georgia-gray">Псевдонимы команд и раскраска терминала</h2>
+<p>Это повышает комфорт работы с терминалом</p>
+
+<p><code>vi /home/admin/.bash_profile</code></p>
+
+<p><pre class="padding">export PS1='\[\033[0;31m\]\u\[\033[0;33m\]@\[\033[0;36m\]\h \[\033[0;33m\]\w \[\033[0;35m\]\$ \[\033[00m\]'
+
+eval "`dircolors`"
+
+alias ls='ls $LS_OPTIONS'
+alias la='ls $LS_OPTIONS -lA'
+alias ..='cd ..'
+
+export HISTFILESIZE=99999999
+export HISTSIZE=99999999
+export HISTCONTROL="ignoreboth"
+
+export LS_OPTIONS='--color=auto -h'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit -m'
+alias gca='git commit -a -m'
+alias gac='git commit -a -m'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+
+alias got='git '
+alias get='git '</pre></p>
+
+<h2 class="georgia-gray">Указать hostname</h2>
+
+<p>Если например у сервера такое имя <b>dorothy.movealong.org</b>, то <b>dorothy</b> cледует указать в качестве hostname</p>
+
+<p><code>sudo vi /etc/hostname</code></p>
+<p><code>sudo hostname server1</code></p>
+
+<p><code>hostname</code></p>
+
+<p>Далее в /etc/hosts прописывается полное имя</p>
+
+<p><code>sudo vi /etc/hosts</code></p>
+<p><code>69.56.173.86    dorothy.movealong.org    dorothy</code></p>
+
+<p><a href="https://www.movealong.org/hostname.html">https://www.movealong.org/hostname.html</a></p>
+
+<h2 class="georgia-gray">Настроить cron</h2>
+
+<p>Отделить лог cron'а</p>
+
+<p><code>sudo vi /etc/rsyslog.conf</code></p>
+
+<p>Раскомментировать строку <code>cron.* /var/log/cron</code></p>
+
+<p>Прописать почту для информирования об ошибках</p>
+
+<p><code>vi /etc/crontab</code></p>
+
+<pre class="padding">MAILTO=mail@mail.ru</pre>
+
+<p><code>sudo service rsyslog restart</code></p>
+<p><code>sudo service cron restart</code></p>
+
+<h2 class="georgia-gray">MySQL, Apache, Nginx, GIT</h2>
+
+<p>Пароль придумать и сохранить в соответствующей документации</p>
+
+<p><code>apt-get install mysql-server mysql-client</code></p>
+
+<p><a href="http://dev.mysql.com/doc/refman/5.6/en/tablespace-enabling.html">Прописать InnoDB File-Per-Table Mode</a>:
+	To make file-per-table mode the default for a MySQL server add this line to the [mysqld] section of my.cnf:</p>
+
+<p><code>vi /etc/mysql/my.cnf</code></p>
+
+<p><pre class="padding">[mysqld]
+innodb_file_per_table</pre></p>
+
+
+<p>Прописывать аккаунт в mysqlworkbench</p>
+
+<p><code>apt-get install apache2</code></p>
+<p><code>a2enmod rewrite</code></p>
+<p><code>apt-get install nginx</code></p>
+<p><code>apt-get install git-core git-doc</code></p>
+
+<p>Права доступа для хранилища веб-сервера</p>
+<p><code>chown -R admin:admin /var/www</code></p>
+<p>Настройка Apache</p>
+<p><code>vi /etc/apache2/ports.conf</code></p>
+<p><pre class="padding">NameVirtualHost *:8080
+Listen 127.0.0.1:8080</pre></p>
+<p><code>vi /etc/apache2/apache2.conf</code></p>
+
+<p>Дописать в конец</p>
+<p><pre class="padding">ServerName hostname.com</pre></p>
+
+<p>Настройка логов Apache за Nginx'ом</p>
+
+<p>Luckily, nginx provides a HTTP X-Forwarded-For header containing the clients real IP address, although apache doesn’t pick it up by default. To allow apache to recognize the original client IP, we need to install the mod_rpaf module. On ubuntu, this is as simple as installing a package</p>
+
+<p><code>apt-get install libapache2-mod-rpaf</code></p>
+
+<p>Once you have installed mod_rpaf, you need to configure apache. Add something similar to the following to your apache config (alter the RPAFproxy_ips setting as appropriate to match the IP address(es) of your nginx server(s)</p>
+
+<p><code>vi /etc/apache2/apache2.conf</code></p>
+
+<p><pre class="padding">&lt;IfModule mod_rpaf.c&gt;
+  RPAFenable On
+  RPAFsethostname On
+  RPAFproxy_ips 127.0.0.1
+&lt;/IfModule&gt;</pre></p>
+
+<h2 class="georgia-gray">Установить mojolicious</h2>
+
+<p><code>apt-get install curl</code></p>
+<p><code>apt-get install make</code></p>
+
+<p>NET::SMTP::SSL</p>
+<p><code>apt-get install libnet-smtp-ssl-perl</code></p>
+<p><code>apt-get install libauthen-sasl-perl</code></p>
+
+<p><code>curl get.mojolicio.us | sh</code></p>
+
+<h2 class="georgia-gray">Установить перл-модули</h2>
+
+<p>HTML::Template</p>
+<p><code>apt-get install libhtml-template-perl</code></p>
+
+<p>MIME/Lite.pm</p>
+<p><code>apt-get install libmime-lite-perl</code></p>
+
+<p>Image/Magick.pm</p>
+<p><code>apt-get install perlmagick</code></p>
+
+<p>GD.pm</p>
+<p><code>apt-get install libgd-gd2-perl</code></p>
+
+<p>PDF::API2</p>
+<p><code>apt-get install libpdf-api2-perl</code></p>
+
+<p>Excel::Writer::XLSX</p>
+<p><code>apt-get install libexcel-writer-xlsx-perl</code></p>
+
+<p>LWP/UserAgent</p>
+<p><code>apt-get install libwww-perl</code></p>
+
+<p>Date/Calc.pm</p>
+<p><code>apt-get install libdate-calc-perl</code></p>
+
+<p>MIME::Base64</p>
+<p><code>apt-get install libemail-mime-encodings-perl</code></p>
+
+<p>Memcached + Cache/Memcached.pm</p>
+<p><code>apt-get install memcached</code></p>
+<p><code>apt-get install libcache-memcached-perl</code></p>
+
+<h2 class="georgia-gray">Подключить временные зоны</h2>
+
+<p><code>mysql_tzinfo_to_sql /usr/share/zoneinfo/ | mysql -u root -p mysql</code></p>
+
+<h2 class="georgia-gray">Настроить отправку почты</h2>
+
+<p>Для начала убедимся, что утилиту sendmail заменяет exim4 из базовой поставки Debian:</p>
+
+<p><code>stat /usr/sbin/sendmail</code></p>
+
+<p>Результат должен быть таким: <code>File: `/usr/sbin/sendmail' -> `exim4'</code></p>
+
+<p>Если это не так, необходимо установить exim4</p>
+
+<p><code>apt-get install exim4</code></p>
+<p><code>dpkg-reconfigure exim4-config</code></p>
+<p>Среди предлагаемых параметров выбрать отличный от предустановленных только на
+первом экране: <code>internet site; mail is sent and received directly using SMTP</code>
+и на втором экране - имя хоста.</p>
+
+<h2 class="georgia-gray">Прописать ключ для BitBucket</h2>
+
+<p><b>Из под обычного пользователя</b></p>
+<p><code>ssh-keygen</code></p>
+<p><code>cat ~/.ssh/id_rsa.pub</code></p>
+<p>После чего добавить ключ в профайл</p>
+
+<h2 class="georgia-gray">Установка проверки орфографии</h2>
+
+<p><b>Из под root</b></p>
+
+<p><code>apt-get install hunspell</code></p>
+<p>русский словарь: <a href="https://code.google.com/p/hunspell-ru/">https://code.google.com/p/hunspell-ru/</a></p>
+
+<p><code>wget https://bitbucket.org/Shaman_Alex/russian-dictionary-hunspell/downloads/ru_RU_UTF-8_20131101.zip</code></p>
+<p>копируем словари в /usr/share/hunspell</p>
+
+<p><code>apt-get install unzip</code></p>
+<p><code>unzip ru_RU_UTF-8_20131101.zip</code></p>
+<p><code>mv ru_RU.dic /usr/share/hunspell/</code></p>
+<p><code>mv ru_RU.aff /usr/share/hunspell/</code></p>
+
+<h2 class="georgia-gray">Установка Sphinx</h2>
+
+<p>узнаём версию дебиан:</p>
+<p>Use the command:</p>
+<p><code>/bin/uname -m</code></p>
+<p>You will typically get: «i686» for 32-bit (maybe 'i586' is an possibility too?), and: «x86_64» for 64-bit.</p>
+<p><code>lsb_release -a</code></p>
+<p><code>cat /etc/debian_version</code></p>
+
+<p><b>Из под root</b></p>
+
+<p>скачиваем нужный пакет: <a href="http://sphinxsearch.com/downloads/release/">http://sphinxsearch.com/downloads/release/</a></p>
+
+<p>Debian 7 / 32:</p>
+
+<p><code>wget http://sphinxsearch.com/files/sphinxsearch_2.1.4-release-1~wheezy_i386.deb</code></p>
+
+<p>Debian 7 / 64:</p>
+
+<p><code>wget http://sphinxsearch.com/files/sphinxsearch_2.1.6-release-1~wheezy_amd64.deb</code></p>
+
+<p><code>apt-get install libpq5</code></p>
+
+<p>Debian 7 / 32:</p>
+
+<p><code>dpkg -i sphinxsearch_2.1.4-release-1~wheezy_i386.deb</code></p>
+
+<p>Debian 7 / 64:</p>
+
+<p><code>dpkg -i sphinxsearch_2.1.6-release-1~wheezy_amd64.deb</code></p>
+
+<p>Автозапуск Sphinx</p>
+<p>в файл</p>
+<p><code>vi /etc/rc.local</code></p>
+<p>добавить</p>
+<p><pre class="padding">mkdir -p /var/run/sphinxsearch
+/etc/init.d/sphinxsearch start</pre></p>
+
+
+<!--
+<p>? <a href="http://svdev.ru/blog/sphinx-install/">http://svdev.ru/blog/sphinx-install/</a></p>
+<p><code>cat /etc/sphinxsearch/sphinx.conf</code></p>
+
+<p><a href="http://svdev.ru/blog/sphinx-install/">http://svdev.ru/blog/sphinx-install/</a></p>
+
+<p><a href="http://livestreet.ru/blog/dev_documentation/366.html">http://livestreet.ru/blog/dev_documentation/366.html</a></p>
+
+<p>для шестого дебиана (32):
+<code>http://sphinxsearch.com/files/sphinxsearch_2.1.5-release-1_i386.deb</code></p>
+-->
+
