@@ -22,6 +22,7 @@ permalink: en/contents
 <tr>
   <th>Life</th>
   <th>Work </th>
+  <th>Serbia </th>
   <th>Russia</th>
   <th>World</th>
 </tr>
@@ -51,6 +52,16 @@ permalink: en/contents
 {% endfor %}
 </dl></td>
 
+<td><dl>
+    {% assign cat = year.items | reverse %}
+    {% for post in cat %}
+    {% if post.categories contains "srbija" and post.lang == "en" %}
+        <dt>{% include date-no-year.html date=post.date %}</dt>
+        <dd><a href="{{ post.url }}">{{ post.title }}</a></dd>
+    {% endif %}
+    {% endfor %}
+</dl></td>
+    
 <td><dl>
 {% assign cat = year.items | reverse %}
 {% for post in cat %}
