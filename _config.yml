@@ -3,6 +3,8 @@ permalink: /:slug
 
 exclude: [tools]
 
+image-storage: "https://raskumandrin.s3.eu-west-1.amazonaws.com/"
+
 defaults:
   # Default language
   -
