@@ -2,7 +2,7 @@
 url: watermarks
 title: Watermarks for e-shop's images
 excerpt: |
-    <p><a href="/en/watermarks"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/poster.jpg" class="img-fluid"></a></p>
+    <p><a href="/en/watermarks"><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/poster.jpg" class="img-fluid"></a></p>
     <p>Initial requirements for merging watermarks.
     <br>1. Complicate the third-party use.
     <br>2. Visibility of a watermark on a white background and on a black background (and any other color of source image).
@@ -27,23 +27,23 @@ js: [highlight]
 <h3>Style of watermark</h3>
 <p>Using only transparent label was not a good solution. If we talk about the white transparent 
 label, it will not be read on a white background. Similarly with other colors.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/bilberry-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/bilberry-en.jpg" class="img-fluid"></p>
 
 <p>Good solution was to add to the white transparent label its dark transparent shade. 
 The result will be easy to read regardless of the color of the background image.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry-en.jpg" class="img-fluid"></p>
 
 <p>The text is also can be read. For easier reading, you can try to pick the best value for the transparency of the label and its shadow.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/georgia-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/georgia-en.jpg" class="img-fluid"></p>
 
 <p>Everything seems to be fine, but there is a problem with the protection (by the way on how to remove the watermark from image). Usually watermark 
 in this case the same for all images and is located in the same location. Most often in the center.
 To remove watermark, blur slightly region with old label, and put over new watermark.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry2-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry2-en.jpg" class="img-fluid"></p>
 
 <p>To eliminate this kind of use, tile all image with watermark. The first element should be put exactly in the center and the rest - around him. 
 everything becomes more accurate after rotating label.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orange-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orange-en.jpg" class="img-fluid"></p>
 
 <div style="border: dashed 1px #009; padding: 16px; padding-bottom: 0; margin-bottom: 2em; color: #009;">
 	<p style="margin-bottom: 4px;">The Author of photos with berries and orange is <a style="color: #009;" href="https://vk.com/nordling"><span class="icon-vk-com"></span>Kirill Rrasnov</a>.</p>
@@ -272,4 +272,4 @@ $canvas->Write("jpg:$ARGV[2]");
 
 
 <p>Result of these scripts is below.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orng-en.jpg" class="img-fluid"></p>
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orng-en.jpg" class="img-fluid"></p>
