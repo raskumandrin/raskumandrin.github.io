@@ -3,6 +3,8 @@ permalink: /:slug
 
 exclude: [tools]
 
+image-storage: "https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev"
+
 defaults:
   # Default language
   -
