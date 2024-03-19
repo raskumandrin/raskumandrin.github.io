@@ -2,7 +2,7 @@
 url: watermarks
 title: «Водяные знаки» для изображений интернет-магазина
 excerpt: |
-    <p><a href="/watermarks"><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/poster.jpg"></a></p>
+    <p><a href="/watermarks"><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/poster.jpg"></a></p>
     <p>Исходные требования к водяным знакам были такими.
     <br>1. Максимально усложнить стороннее использование.
     <br>2. Видимость водяного знака на белом фоне, на чёрном фоне (и на любых других).
@@ -29,26 +29,26 @@ js: [highlight]
 <h3>Тип «водяного знака»</h3>
 <p>Использовать полупрозрачную надпись оказалось плохим решением. Если говорить про полупрозрачную
 	надпись белого цвета, то она не будет читаться на белом изображении. Аналогично с другими цветами.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/bilberry-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/bilberry-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/bilberry-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/bilberry-en.jpg"></p> -->
 <p>Неплохим решением оказалось добавить к белой полупрозрачной надписи чёрную полупрозрачную тень.
 	В результате получается вариант, который будет одинаково хорошо восприниматься независимо от цвета фона изображения.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry-en.jpg"></p> -->
 <p>Текст тоже воспринимается. Чтобы читалось проще можно попробовать подобрать лучшее соотношение прозрачности надписи и её тени.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/georgia-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/georgia-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/georgia-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/georgia-en.jpg"></p> -->
 
 <p>Вроде бы всё хорошо, но остаётся проблема с защищённостью (к слову о том, как убрать водяной знак). Как правило водяной знак
 	в этом случае одинаковый и расположен в одном и том же месте изображения. Чаще в центре. Нужно аккуратно размыть область
 	с водяным знаком и наложить поверх новый.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry2-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/raspberry2-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry2-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/raspberry2-en.jpg"></p> -->
 
 <p>Чтобы исключить подобное стороннее использование, замостим водяным знаком всё изображение. Первый элемент расположим в центре, а остальные — вокруг него.
 	Если надпись повернуть, всё становится аккуратнее.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orange-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orange-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orange-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orange-en.jpg"></p> -->
 
 <div style="border: dashed 1px #009; padding: 16px; padding-bottom: 0; margin-bottom: 2em; color: #009;">
 	<p style="margin-bottom: 4px;">Автор картинок с ягодами и апельсином — <a style="color: #009;" href="https://vk.com/nordling"><span class="icon-vk-com"></span>Кирилл Краснов</a>.</p>
@@ -278,5 +278,5 @@ $canvas->Write("jpg:$ARGV[2]");
 
 
 <p>Результат работы этих скриптов выгляди так.</p>
-<p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orng-ru.jpg"></p>
-<!-- <p><img src="//s3-eu-west-1.amazonaws.com/raskumandrin/2014-05-25-watermarks/orng-en.jpg"></p> -->
+<p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orng-ru.jpg"></p>
+<!-- <p><img src="https://pub-3e57dc6805fe47c580cebfca6d4f2436.r2.dev/2014-05-25-watermarks/orng-en.jpg"></p> -->
